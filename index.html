@@ -8,31 +8,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1 class="title">Etch a Sketch</h1>
     <div class="content">
-        <div class="container">
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-    
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-    
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-    
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-        </div>
-        
-        <div class="custom-range-slider">
-            <input id="sizeSlider" type="range" value="16" min="1" max="100">
+        <div class="container"></div>
+        <div class="config">
+            <input class="color-picker" type="color">
+            <div class="custom-range-slider">
+                <input id="sizeSlider" type="range" value="16" min="1" max="64">
+            </div>
+            <button class="clear">Clear</button>
         </div>
     </div>
 </body>
