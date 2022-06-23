@@ -8,6 +8,7 @@
     padding: 0;
     font-family: 'Oswald', sans-serif;
     font-family: 'Source Sans Pro', sans-serif;
+    user-select: none;
 }
 
 body {
@@ -88,9 +89,18 @@ input[type='range']::-webkit-slider-thumb {
     transform: translateX(-50%);
 }
 
-input[type='color'] {
+input[attribute~='fcolorp'] {
     width: 100px;
     height: 100px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+input[attribute~='scolorp'] {
+    width: 70px;
+    height: 70px;
     cursor: pointer;
     border-radius: 50%;
     border: none;
@@ -114,23 +124,69 @@ input[type='color']::-webkit-color-swatch {
     gap: 50px;
 }
 
-.clear {
+.clear, .fill-button, .boundary, .startpoint {
     width: 100px;
     height: 50px;
     border-radius: 40px;
     border: solid rgb(115, 185, 255) 2px;
     font-size: 25px;
+    font-weight: bold;
     background-color: burlywood;
-    color: rgb(235, 224, 224);
+    color: rgb(0, 0, 0);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
 
+.boundary {
+    font-size: 12px;
+}
+
+.startpoint {
+    font-size: 12px;
 }
 
 .title {
+    white-space: nowrap;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     font-size: 125px;
     text-shadow: 4px 4px 0px rgb(115, 185, 255);
     mix-blend-mode: darken;
+}
+
+.fill-config {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.fill-config.nofade {
+    opacity: 1;
+}
+
+.fill-col-text {
+    position: relative;
+}
+
+.color-picker {
+    position: relative;
+}
+
+.fill-text {
+    position: absolute;
+    color: white;
+    top: 23px;
+    left: 7px;
+    text-align: center;
+}
+
+.start {
+     /* marks the starting element for floodfill */ 
+}
+
+.edge {
+    /* marks an edge for floodfill */
 }

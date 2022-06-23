@@ -12,13 +12,22 @@
     <div class="content">
         <div class="container"></div>
         <div class="config">
-            <input class="color-picker" type="color">
+            <input class="color-picker-main" type="color" attribute="fcolorp">
             <div class="custom-range-slider">
                 <input id="sizeSlider" type="range" value="16" min="1" max="64">
             </div>
             <button class="clear">Clear</button>
+            <button class="fill-button">Fill</button>
+            <div class="fill-config">
+                <button class="boundary">Draw Boundary</button>
+                <div class="fill-col-text">
+                    <input class="color-picker" type="color" attribute="scolorp">
+                    <p class="fill-text">Fill Color</p>
+                </div>
+                <button class="startpoint">Start Point</button>
+            </div>
         </div>
     </div>
 </body>
-<script src="app.js"></script>
+<script type="module" defer src="./js/app.js"></script>
 </html>
