@@ -39,6 +39,7 @@ let fillCol = DEFAULT_COLOR
 let fillClicked = false
 let startPressed = false
 let boundaryClicked = false
+let disableStartPointClick = false
 
 clearButton.onclick = e => resetGrid(currentSize);
 colorSwatch.oninput = e => setCurrentColor(e.target.value)
@@ -53,6 +54,7 @@ fillBtn.onclick = () => {
     fillClicked = false 
     startPressed = false
     boundaryClicked = false
+    disableStartPointClick = false
   }
   else {
     fillClicked = true
@@ -105,7 +107,8 @@ function getCoord() {
 }
 
 function setStart(e) {
-  if (e.type === 'mousedown' && startPressed) {
+  if (e.type === 'mousedown' && startPressed && !disableStartPointClick) {
+    disableStartPointClick = true
     e.target.style.backgroundColor = currentColor
     e.target.classList.add('start')
     startFill()

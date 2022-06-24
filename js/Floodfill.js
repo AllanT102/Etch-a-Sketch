@@ -65,5 +65,3 @@ function performAnimation() {
 
     if (count < blocksAnimated.length) requestAnimationFrame(performAnimation);
 }
-
-// implement a bfs algorithm
