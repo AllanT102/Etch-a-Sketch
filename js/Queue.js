@@ -1,19 +1,19 @@
-export default class Stack {
+export default class Queue {
     constructor() {
         this.items = []
     }
 
-    push(item) {
+    enqueue(item) {
         this.items.push(item)
     }
 
-    pop() {
-        return this.items.pop()
+    dequeue() {
+        return this.items.shift();
     }
 
     peek() {
         if (this.items.length == 0) return null
-        return this.items[this.items.length - 1]
+        return this.items[0]
     }
 
     getSize() {

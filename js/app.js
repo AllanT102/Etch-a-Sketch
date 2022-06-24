@@ -32,9 +32,10 @@ const boundary = document.querySelector('.boundary')
 const fillColor = document.querySelector('.color-picker')
 const startPoint = document.querySelector('.startpoint')
 
+
 const rangeInput = rangeLabel.children[0]
 const thumbWidth = 15
-let fillCol
+let fillCol = DEFAULT_COLOR
 let fillClicked = false
 let startPressed = false
 let boundaryClicked = false
@@ -43,14 +44,20 @@ clearButton.onclick = e => resetGrid(currentSize);
 colorSwatch.oninput = e => setCurrentColor(e.target.value)
 fillColor.oninput = e => setFillCol(e.target.value)
 fillBtn.onclick = () => {
-  resetGrid(currentSize)
+  resetGrid(64)
+  rangeInput.value = 64
+  positionBubble()
   fillConfig.classList.toggle('nofade')
   if (fillClicked) {
+    rangeInput.disabled = false
     fillClicked = false 
     startPressed = false
     boundaryClicked = false
   }
-  else fillClicked = true
+  else {
+    fillClicked = true
+    rangeInput.disabled = true
+  }
 }
 startPoint.onclick = () => {
   if (startPressed) startPressed = false
@@ -82,8 +89,10 @@ function setUpGrid(size) {
 }
 
 function startFill() {
+  const floodFill = new Floodfill();
   const startCoord = getCoord();
-  fillBFS(startCoord, fillCol, blocks)
+  const blocks = document.querySelectorAll('.block')
+  floodFill.fillBFS(startCoord, fillCol, blocks)
 }
 
 function getCoord() {
@@ -93,12 +102,10 @@ function getCoord() {
     if (blocks[i].classList.contains('start')) break;
     else count++
   }
-  console.log(count)
 }
 
 function setStart(e) {
   if (e.type === 'mousedown' && startPressed) {
-    console.log(startPressed)
     e.target.style.backgroundColor = currentColor
     e.target.classList.add('start')
     startFill()
