@@ -2,18 +2,27 @@ import Queue from './Queue.js'
 
 const DEFAULT_WIDTH = 64
 const DEFAULT_HEIGHT = 64
-let count = 0
-let blocksAnimated = []
-let fillColor
+// let count = 0
+// let blocksAnimated = []
+// let fillColor
 
 export default class Floodfill {
     constructor() {
         this.map = new Array(64).fill(0).map(() => new Array(64).fill(0))
+        this.blocksAnimated = []
+        this.fillColor
+        this.count = 0
     }
     
+    performAnimation() {
+        if (this.count < this.blocksAnimated.length) this.blocksAnimated[this.count].block.style.backgroundColor = this.fillColor;
+        this.count++
+    
+        if (this.count < this.blocksAnimated.length) requestAnimationFrame(this.performAnimation.bind(this));
+    }
     
     fillBFS(start, col, blocks) {
-        fillColor = col
+        this.fillColor = col
         let blockNum = 0 
         let startX
         let startY
@@ -41,7 +50,7 @@ export default class Floodfill {
             const curr = q.dequeue()
             if (!visited.includes(curr) && !curr.block.classList.contains('edge')) {
                 //store the set block in array to animate later
-                blocksAnimated.push(curr)
+                this.blocksAnimated.push(curr)
                 visited.push(curr)
                 if (curr.xcoord+1 < DEFAULT_WIDTH) q.enqueue(this.map[curr.xcoord+1][curr.ycoord])
                 if (curr.xcoord-1 >= 0) q.enqueue(this.map[curr.xcoord-1][curr.ycoord])
@@ -49,19 +58,6 @@ export default class Floodfill {
                 if (curr.ycoord-1 >= 0) q.enqueue(this.map[curr.xcoord][curr.ycoord-1])
             }
         }
-        this.startAnimation()
+        this.performAnimation()
     }
-    
-    startAnimation() {
-        
-        requestAnimationFrame(performAnimation)
-    }
-    
-}
-
-function performAnimation() {
-    if (count < blocksAnimated.length) blocksAnimated[count].block.style.backgroundColor = fillColor;
-    count++
-
-    if (count < blocksAnimated.length) requestAnimationFrame(performAnimation);
 }

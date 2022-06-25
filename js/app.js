@@ -41,7 +41,10 @@ let startPressed = false
 let boundaryClicked = false
 let disableStartPointClick = false
 
-clearButton.onclick = e => resetGrid(currentSize);
+clearButton.onclick = e => {
+  resetGrid(currentSize)
+  disableStartPointClick = false
+}
 colorSwatch.oninput = e => setCurrentColor(e.target.value)
 fillColor.oninput = e => setFillCol(e.target.value)
 fillBtn.onclick = () => {
